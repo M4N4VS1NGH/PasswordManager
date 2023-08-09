@@ -20,6 +20,7 @@ public class PasswordManager implements Subject{
     private static PasswordManager instance;
     private List<Observer> observers;
 
+    // Initialize passwords map, observers list, and load any passwords from the database
     public PasswordManager() {
         passwords = new HashMap<>();
         observers = new ArrayList<>();
@@ -38,19 +39,24 @@ public class PasswordManager implements Subject{
         return instance;
     }
 
+    // Add the password to the map, and save it to the database
     public void addPassword(String website, PasswordEntry entry) {
         passwords.put(website, entry);
         savePasswords();
     }
+
+    // Remove the password from the map, and save the database
     public void deletePassword(String website) {
         passwords.remove(website);
         savePasswords();
     }
 
+    // Retrieve password based on website
     public PasswordEntry getPasswordEntry(String website) {
         return passwords.get(website);
     }
 
+    // Replace old password with a newer one based on website
     public void changePassword(String website, String newPassword) {
         PasswordEntry passwordEntry = passwords.get(website);
         if (passwordEntry != null) {
@@ -58,12 +64,15 @@ public class PasswordManager implements Subject{
         }
     }
 
+    // Return a list of all websites with saved password information
     public void listWebsites() {
         System.out.println("Stored websites:");
         for (String website : passwords.keySet()) {
             System.out.println(website);
         }
     }
+
+    // Load passwords from the database
     private void loadPasswords() {
         try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE_PATH))) {
             String line;
@@ -80,6 +89,8 @@ public class PasswordManager implements Subject{
             e.printStackTrace();
         }
     }
+
+    // Save passwords into the database
     private void savePasswords() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH))) {
             for (Map.Entry<String, PasswordEntry> entry : passwords.entrySet()) {

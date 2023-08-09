@@ -1,7 +1,9 @@
 # PasswordManager
 
 A simple implementation of a Password Manager using ChatGPT-3.5
+
 Made with Java (Amazon Corretto Version 11.0.19)
+
 Tested with JUnit testing framework
 
 ## How To Use:

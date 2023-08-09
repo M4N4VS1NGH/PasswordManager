@@ -5,6 +5,14 @@ import java.util.Random;
 
 // Frameworks & Drivers Layer
 
+/**
+Generate a random password by entering a positive integer representing the length of your password
+
+Example: 
+
+Input: 5, Output: a1b2C
+**/
+
 public class PasswordGenerator {
     private static final String LOWER_CASE = "abcdefghijklmnopqrstuvwxyz";
     private static final String UPPER_CASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -17,6 +25,7 @@ public class PasswordGenerator {
     public static String generateRandomPassword(int length) {
         StringBuilder password = new StringBuilder();
 
+        // Check if input is not a positive integer
         if (length <= 0) {
             throw new IllegalArgumentException("Password length must be a positive integer.");
         }

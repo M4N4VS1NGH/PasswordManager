@@ -12,10 +12,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        // Initialize the components for Main.java
         PasswordManager passwordManager = PasswordManager.getInstance();
         UserInterface userInterface = new UserInterface(passwordManager);
         PasswordChangeNotifier passwordChangeNotifier = new PasswordChangeNotifier(passwordManager);
         UserNotificationObserver userNotificationObserver = new UserNotificationObserver();
+
+        // Connect the components with observers and run the user interface
         passwordChangeNotifier.addObserver(userNotificationObserver);
         userInterface.run();
     }
@@ -29,6 +32,8 @@ class UserInterface {
     public UserInterface(PasswordManager passwordManager) {
         this.passwordManager = passwordManager;
         this.userNotificationObserver = new UserNotificationObserver();
+
+        // Connect the observer and initialize the scanner
         this.passwordManager.addObserver(userNotificationObserver);
         this.scanner = new Scanner(System.in);
     }
@@ -37,6 +42,7 @@ class UserInterface {
         boolean running = true;
 
         while (running) {
+            // Display the menu and get user choice
             printMenu();
             int choice = getUserChoice();
 
@@ -71,6 +77,7 @@ class UserInterface {
         scanner.close();
     }
 
+    // Display the menu and get user choice
     private void printMenu() {
         System.out.println("GPT Password Manager");
         System.out.println("1. Add password");
@@ -83,23 +90,31 @@ class UserInterface {
         System.out.print("Select an option: ");
     }
 
+    // Get the user's choice from the console input
     private int getUserChoice() {
         String input = scanner.nextLine();
         return Integer.parseInt(input);
     }
 
+    // Add a user-entered password entry
     private void addUserPassword() {
+        // Collect user input for website, username, and password
         System.out.print("Enter website: ");
         String website = scanner.nextLine();
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
+
+        // Create a password entry and add it to the password manager
         PasswordEntry entry = new PasswordEntry(username, password);
         passwordManager.addPassword(website, entry);
+
+        // Create a password entry and add it to the password manager
         userNotificationObserver.update(website, "added");
     }
 
+    // Retrieve and display a password entry for a given website
     private void getPassword() {
         System.out.print("Enter website: ");
         String website = scanner.nextLine();
@@ -112,6 +127,7 @@ class UserInterface {
         }
     }
 
+    // Retrieve and display a password entry for a given website
     private void changePassword() {
         System.out.print("Enter website: ");
         String website = scanner.nextLine();
@@ -121,6 +137,7 @@ class UserInterface {
         userNotificationObserver.update(website, "changed");
     }
 
+    // Retrieve and display a password entry for a given website
     private void generatePassword() {
         System.out.print("Enter website: ");
         String website = scanner.nextLine();
@@ -135,6 +152,8 @@ class UserInterface {
         System.out.println("Generated password: " + generatedPassword);
         System.out.println("Password added successfully.");
     }
+
+    // Retrieve and display a password entry for a given website
     private void deleteUserPassword() {
         System.out.print("Enter website to delete: ");
         String website = scanner.nextLine();
@@ -142,6 +161,7 @@ class UserInterface {
         System.out.println("Password entry deleted.");
     }
 
+    // Retrieve and display a password entry for a given website
     private void listWebsites() {
         passwordManager.listWebsites();
         }

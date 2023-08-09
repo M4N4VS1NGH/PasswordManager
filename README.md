@@ -1,10 +1,10 @@
 # PasswordManager
 
-A simple implementation of a Password Manager using ChatGPT-3.5
+- A simple implementation of a Password Manager using ChatGPT-3.5
 
-Made with Java (Amazon Corretto Version 11.0.19)
+- Made with Java (Amazon Corretto Version 11.0.19)
 
-Tested with JUnit testing framework
+- Tested with JUnit testing framework
 
 ## How To Use:
 
@@ -24,9 +24,9 @@ As a user, I want to save login information, be able to retrieve the same inform
 
 ## Design Patterns Used:
 
-Singleton Design Pattern - To ensure the PasswordManager class has one instance which helps with managing resources
+Singleton Design Pattern - to ensure the PasswordManager class has one instance which helps with managing resources
 
-Observer Design Pattern - To help notify users if their password has been successfully saved, deleted, changed, etc.
+Observer Design Pattern - to help notify users if their password has been successfully saved, deleted, changed, etc.
 
 ## Remaining Code Smells:
 There are some long methods in Main.java such as run(), addUserPassword(), generatePassword().
@@ -37,3 +37,7 @@ There are also comments throughout the program, and there are a lot of comments 
 ## SOLID and Clean Architecture:
 
 The application follows all SOLID principles and completely adheres to Clean Architecture. 
+
+## Upcoming Features:
+
+Encryption, extra layers of security, better databasing, enhanced user interface, improved password generator
